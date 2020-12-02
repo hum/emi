@@ -7,8 +7,12 @@ const (
 	IDENT = "IDENT" // add, foobar, x, y, ...
 	INT   = "INT"   // 1234
 
-	ASSIGN = "="
-	PLUS   = "+"
+	ASSIGN   = "="
+	PLUS     = "+"
+	MINUS    = "-"
+	BANG     = "!"
+	ASTERISK = "*"
+	SLASH    = "/"
 
 	COMMA     = ","
 	SEMICOLON = ";"
@@ -20,6 +24,9 @@ const (
 
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
+
+	LT = "<"
+	GT = ">"
 )
 
 type TokenType string

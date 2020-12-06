@@ -32,6 +32,9 @@ const (
 
 	LT = "<"
 	GT = ">"
+
+	EQ     = "=="
+	NOT_EQ = "!="
 )
 
 type TokenType string

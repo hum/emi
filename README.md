@@ -4,7 +4,8 @@ Interpreter for a made-up language written in Go.
 This is a sort-of pet project of mine. Both to understand Go more and to understand interpreters.
 
 ### Todo:
-- [ ] Finish basic functions of the lexer
+- [x] Finish basic functions of the lexer
+- [x] A REPL
 - [ ] Write a parser
   - [ ] AST
 - [ ] Evaluate expressions

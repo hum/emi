@@ -1,6 +1,8 @@
 package parser
 
 import (
+	"fmt"
+
 	"github.com/hum/emi/ast"
 	"github.com/hum/emi/lexer"
 	"github.com/hum/emi/token"
@@ -10,14 +12,28 @@ type Parser struct {
 	l         *lexer.Lexer
 	currToken token.Token
 	peekToken token.Token
+	errors    []string
 }
 
 func New(l *lexer.Lexer) *Parser {
-	p := &Parser{l: l}
+	p := &Parser{
+		l:      l,
+		errors: []string{},
+	}
 	p.nextToken()
 	p.nextToken()
 
 	return p
+}
+
+func (p *Parser) Errors() []string {
+	return p.errors
+}
+
+func (p *Parser) PeekError(t token.TokenType) {
+	msg := fmt.Sprintf("expected next token to be %s, but got %s instead",
+		t, p.peekToken.Type)
+	p.errors = append(p.errors, msg)
 }
 
 func (p *Parser) nextToken() {
@@ -76,7 +92,7 @@ func (p *Parser) ParseProgram() *ast.Program {
 	program := &ast.Program{}
 	program.Statements = []ast.Statement{}
 
-	for p.currToken.Type != token.EOF {
+	for !p.curTokenIs(token.EOF) {
 		stmt := p.parseStatement()
 		if stmt != nil {
 			program.Statements = append(program.Statements, stmt)
